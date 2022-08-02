@@ -1,0 +1,39 @@
+.sub-main{
+    height: 100%;
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #FFF9FE;
+}
+
+.sub-main-container{
+    height: 98%;
+    width: 98%;
+    display: flex;
+    flex-direction: row;
+    border: 2px solid #F0F0F0;
+    border-radius: 10px;
+    background-color: white;
+}
+
+@media screen and (max-width:1000px) {
+    .sub-main{
+        height: 93%;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #FFF9FE;
+    }
+    
+    .sub-main-container{
+        height: 98%;
+        width: 98%;
+        display: flex;
+        flex-direction: row;
+        border: 2px solid #F0F0F0;
+        border-radius: 10px;
+        background-color: white;
+    }
+}

@@ -1,0 +1,33 @@
+*{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+.App {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #858585 #ffffff;
+}
+
+*::-webkit-scrollbar-track {
+  background: #ffffff;
+}
+
+*{
+  font-family: 'Poppins', sans-serif;
+  font-size: small;
+}
+
+h1{
+  font-size: 40px;
+}
+
+h3{
+  font-size: 20px;
+}
+

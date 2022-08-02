@@ -1,0 +1,32 @@
+.Message{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    padding: 10px 20px 0 20px;
+}
+.Message img{
+    height: 10px;
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+.Message .date{
+
+    font-weight: 400;
+    font-size: 10px;
+    color: #858585;
+}
+
+.Message .content{
+    max-width: 50%;
+    height: fit-content;
+    padding: 10px;
+    display: inline-block;
+    text-align: left;
+    background-color: #F6F6F6;
+    border-radius: 10px;
+    color: #858585;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+}

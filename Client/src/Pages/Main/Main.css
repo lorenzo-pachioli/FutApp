@@ -1,0 +1,18 @@
+.main{
+    width: 100vw;
+    height: 90vh;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+}
+
+
+@media screen and (max-width:1000px) {
+    .main{
+        width: 100vw;
+        height: 90%;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+    }
+}

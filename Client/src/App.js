@@ -45,7 +45,6 @@ function App() {
 				})
 			});
 		}
-
 		logIn();
 	}, [setUser, setChats]);
 

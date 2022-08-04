@@ -3,19 +3,23 @@ import { Route, Routes } from "react-router-dom";
 import ChatApp from './Pages/ChatApp/ChatApp';
 import Login from './Pages/Login/Login';
 import LoginBtn from './Components/Login/Log in/LoginBtn';
-import Options from './Components/Login/Options/Options';
 import SignIn from './Components/Login/Sign in/SignIn';
 import Complaints from './Components/Main/Complaints/Complaints';
 import Delete from './Components/Main/Delete/Delete';
 import DeleteAcount from './Components/Main/DeleteAcount/DeleteAcount';
 import SubMain from './Pages/SubMain/SubMain';
+import PrimeraDivision from './Pages/PrimeraDivision/PrimeraDivision';
+import Resultados from './Components/PrimeraDivision/Resultados/Resultados';
+import Posiciones from './Components/PrimeraDivision/Posiciones/Posiciones';
+import Promedios from './Components/PrimeraDivision/Promedios/Promedios';
+import Acumulado from './Components/PrimeraDivision/Acumulado/Acumulado';
 import { AppContext } from './Context/AppContext';
 import io from 'socket.io-client';
 import env from 'react-dotenv';
 import './App.css';
 
-const socket = io.connect(env.SOCKET_URL)
-/* const socket = io.connect("http://localhost:3001") */
+/* const socket = io.connect(env.SOCKET_URL) */
+const socket = io.connect("http://localhost:3001")
 
 function App() {
 
@@ -71,7 +75,10 @@ function App() {
 				}
 			}
 		}
-		onReload()
+		if (tempEmail && tempPass) {
+			onReload()
+		}
+		
 	}, [user, loading]);
 
 	//log out 
@@ -163,18 +170,29 @@ function App() {
 		<div className="App">
 			<Routes>
 				<Route>
-					<Route path="chatapp" element={<ChatApp socket={socket} />} >
-						<Route path="complaints" element={<Complaints socket={socket} />} />
-						<Route path="delete" element={<Delete socket={socket} />} />
-						<Route path="deleteAcount" element={<DeleteAcount socket={socket} />} />
-						<Route path="" element={<SubMain socket={socket} />} />
+					<Route exact path="/" element={<ChatApp socket={socket} />} >
+						{user._id ? (
+							<Route>
+								<Route path="chat" element={<SubMain socket={socket} />} />
+								<Route path="complaints" element={<Complaints socket={socket} />} />
+								<Route path="delete" element={<Delete socket={socket} />} />
+								<Route path="deleteAcount" element={<DeleteAcount socket={socket} />} />
+							</Route>
+							
+						):('')}
+						
+						<Route path="" element={<PrimeraDivision socket={socket} />} >
+							<Route path="acumulado" element={<Acumulado socket={socket} />} />
+							<Route path="promedios" element={<Promedios socket={socket} />} />
+							<Route path="posiciones" element={<Posiciones socket={socket} />} />
+							<Route path="" element={<Resultados socket={socket} />} /> 
+						</Route>
 					</Route>
 				</Route>
 				<Route>
-					<Route exact path="/" element={<Login />}>
+					<Route path="login" element={<Login />}>
 						<Route path="signin" element={<SignIn socket={socket} />} />
-						<Route path="login" element={<LoginBtn socket={socket} />} />
-						<Route path="" element={<Options />} />
+						<Route path="" element={<LoginBtn socket={socket} />} />
 					</Route>
 				</Route>
 			</Routes>

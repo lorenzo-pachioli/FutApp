@@ -1,5 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { AppContext } from '../../../Context/AppContext';
+import { Navigate } from 'react-router-dom';
 import '../../../Pages/SubMain/SubMain.css';
 import './Complaints.css';
 
@@ -72,7 +73,7 @@ export default function Complaints({ socket }) {
                     {url && complain.length > 0 ? (
                         <button onClick={handleComplaints} className='send' >Send</button>
                     ) : (<div className='noButton'></div>)}
-
+                    {user._id ? (''):(<Navigate to='/' replace={true} />)}
                 </div>
 
             </div>

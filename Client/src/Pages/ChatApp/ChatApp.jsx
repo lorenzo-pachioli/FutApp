@@ -24,7 +24,10 @@ export default function ChatApp({ socket }) {
 			})
 			return { chatId: chat._id, unRead: unreadMsj }
 		})
-		setUnReadNum(unRead)
+		if (user._id) {
+			setUnReadNum(unRead);
+		}
+		
 	}, [chats, user, setUnReadNum]);
 
 	const inHeight = {
@@ -44,13 +47,10 @@ export default function ChatApp({ socket }) {
 		msgDelete();
 	}, [setRoom, socket, setChats]);
 
-	return (sessionStorage.getItem('email') ? (
-				<div className="ChatApp" style={inHeight} >
-					<TopBar socket={socket} />
-					<Main socket={socket} />
-				</div>
-			) : (
-				<Navigate to='/' replace={true} />
-			)
+	return (
+			<div className="ChatApp" style={inHeight} >
+				<TopBar socket={socket} />
+				<Main socket={socket} />
+			</div>
 	);
 }

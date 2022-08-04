@@ -1,5 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { AppContext } from '../../../Context/AppContext';
+import { Navigate } from 'react-router-dom';
 import userPhoto from '../../../assets/user.png';
 import '../../../Pages/SubMain/SubMain.css';
 import '../Delete/Delete.css';
@@ -63,6 +64,7 @@ export default function DeleteAcount({ socket }) {
                     </div>
                     <input type='password' className='password' value={password} placeholder='Password' onChange={e => setPassword(e.target.value)} />
                     <button onClick={handleDelete} style={{ 'backgroundColor': '#f50d5ac4' }}>Delete</button>
+                    {user._id ? (''):(<Navigate to='/' replace={true} />)}
                 </div>
             </div>
         </div>

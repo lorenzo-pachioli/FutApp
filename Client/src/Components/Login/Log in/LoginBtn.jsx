@@ -72,7 +72,7 @@ export default function LoginBtn({socket}) {
         <button type='submit' className='submit' onClick={handleLogIn} disabled={loading}>
           {loading ? ('Loading...'):('Log in')}
           </button>
-        {redirect ? (<Navigate to='/chatapp' replace={true} />):('')}
+        {redirect ? (<Navigate to='/' replace={true} />):('')}
       </div>
   );
 }

@@ -5,6 +5,7 @@ import { Navigate } from "react-router-dom";
 import './Main.css';
 import { Outlet } from 'react-router-dom';
 
+
 export default function Main({ socket }) {
     const { setRedirect, setLoading } = useContext(AppContext);
 
@@ -13,6 +14,7 @@ export default function Main({ socket }) {
         setRedirect(false);
     }, [setRedirect, setLoading]);
 
+    
     return (
         <div className='main' >
             <ControlPanel socket={socket} />

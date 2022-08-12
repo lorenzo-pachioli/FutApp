@@ -1,7 +1,14 @@
 import './Board.css';
 
 export default function Board({board}) {
-
+    let boardStand = [];
+    if (board.standings ) {
+        if ( board.standings[0]) {
+            boardStand = board.standings[0];
+            console.log(boardStand);
+        }
+        
+    }
     return (
         <div className='posiciones-container'>
             <ul className='posiciones-title'>
@@ -17,22 +24,24 @@ export default function Board({board}) {
                 <li className='width-15'>Pts</li>
             </ul>
             <div className='posiciones-board'>
-                {board.map(pos => {
-                    return (
-                        <ul className='board-row' key={pos.pos}>
-                            <li className='width-15 tained-item'>{pos.pos}</li>
-                            <li id='align-left' className='width-35'>{pos.equipo}</li>
-                            <li className='width-5 tained-item'>{pos.pj}</li>
-                            <li className='width-5'>{pos.g}</li>
-                            <li className='width-5'>{pos.e}</li>
-                            <li className='width-5'>{pos.p}</li>
-                            <li className='width-5'>{pos.gf}</li>
-                            <li className='width-5'>{pos.gf}</li>
-                            <li className='width-5'>{pos.dg}</li>
-                            <li className='width-15 tained-item'>{pos.pts}</li>
-                        </ul>
-                    )
-                })}
+                {boardStand.length > 0 ? (
+                        boardStand.map(pos => {
+                            return (
+                                <ul className='board-row' key={pos.rank}>
+                                    <li className='width-15 tained-item'>{pos.rank}</li>
+                                    <li id='align-left' className='width-35'>{pos.team.name}</li>
+                                    <li className='width-5 tained-item'>{pos.all.played}</li>
+                                    <li className='width-5'>{pos.all.win}</li>
+                                    <li className='width-5'>{pos.all.draw}</li>
+                                    <li className='width-5'>{pos.all.lose}</li>
+                                    <li className='width-5'>{pos.all.goals.for}</li>
+                                    <li className='width-5'>{pos.all.goals.against}</li>
+                                    <li className='width-5'>{pos.all.goals.for - pos.all.goals.against >= 0 ? ('+'):('')}{pos.goalsDiff}</li>
+                                    <li className='width-15 tained-item'>{pos.points}</li>
+                                </ul>
+                            )
+                        })
+                ):(<p>Loading...</p>)}
             </div>
 
         </div>

@@ -8,34 +8,36 @@ import './PrimeraDivision.css';
 
 export default function PrimeraDivision({ socket }) {
 
-    const {setprimeraDivision, setResultsPD} = useContext(AppContext);
+    const { setprimeraDivision, setResultsPD } = useContext(AppContext);
     const history = useLocation();
 
     useEffect(() => {
-        async function getData() {
-            try {
-                const LPA = ['128', '2022'];
+        function getData() {
 
-                const endPoint1 = 'http://localhost:3001'
+            const LPA = ['128', '2022'];
+            console.log('1');
+            const endPoint1 = 'http://localhost:3001'
 
-                const fect1 = await axios.get(endPoint1 + `/standings?league=${LPA[0]}`)
-                const fect2 = await axios.get(endPoint1 + `/fixtures?league=${LPA[0]}`)
+            const fect1 = axios.get(endPoint1 + `/standings?league=${LPA[0]}`)
+            const fect2 = axios.get(endPoint1 + `/fixtures?league=${LPA[0]}`)
 
-                if (fect1.status === 200) {
-                    if (fect1.data.success) {
-                        setprimeraDivision(fect1.data.content[0].league);
+            Promise.all([fect1, fect2])
+                .then(([fect1, fect2]) => {
+                    if (fect1.status === 200) {
+                        if (fect1.data.success) {
+                            setprimeraDivision(fect1.data.content[0].league);
+                            console.log('2');
+                        }
                     }
-                }
-                
-                if (fect2.status === 200) {
-                    if (fect2.data.success) {
-                        setResultsPD(fect2.data.content);
-                    }
-                }
 
-            } catch (err) {
-                console.log('error:', err);
-            }
+                    if (fect2.status === 200) {
+                        if (fect2.data.success) {
+                            setResultsPD(fect2.data.content);
+                            console.log('3');
+                        }
+                    }
+                })
+                .catch(err => console.log('error:', err));
         }
         getData()
     }, [setResultsPD, setprimeraDivision]);

@@ -1,0 +1,64 @@
+.partido-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2px;
+    border-radius: 20px;
+    background:  linear-gradient(178.18deg, #FD749B -13.56%, #281AC8 158.3%);
+}
+
+.partido-subContainer{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-radius: 20px;
+    padding: 10px;
+    gap:10px;
+    background-color: white;
+}
+
+.team{
+    width: 25%;
+    
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    font-weight: 700;
+}
+
+
+.result {
+    min-width: 20%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    font-weight: 700;
+}
+
+.result div{
+    display: flex;
+    justify-content:flex-start;
+    align-items: center;
+    background:  linear-gradient(178.18deg, #FD749B -13.56%, #281AC8 158.3%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.partido-container h2 {
+    font-size: 20px;
+    color: #4d4d4d;
+}
+
+.partido-container h3 {
+    font-size: 15px;
+    color: #858585;
+}
+

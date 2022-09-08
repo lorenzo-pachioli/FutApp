@@ -1,9 +1,10 @@
 .main{
-    width: 100vw;
-    height: 90vh;
+    width: 100%;
+    height: fit-content;
     box-sizing: border-box;
     display: flex;
     flex-direction: row;
+    background-color: #FFF9FE;
 }
 
 

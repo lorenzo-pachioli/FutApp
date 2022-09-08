@@ -14,6 +14,8 @@ export default function AppProvider({ children }) {
     const [newChat, setNewChat] = useState(false)
     const[unReadNum, setUnReadNum] = useState([])
     const [url, setUrl] = useState('')
+    const [primeraDivision, setprimeraDivision] = useState({});
+    const [resultsPD, setResultsPD] = useState([]);
    
 
     return (
@@ -40,8 +42,11 @@ export default function AppProvider({ children }) {
               unReadNum, 
               setUnReadNum, 
               url, 
-              setUrl
-              
+              setUrl,
+              primeraDivision, 
+              setprimeraDivision,
+              resultsPD, 
+              setResultsPD
           }}
         >
           {children}

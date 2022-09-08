@@ -8,7 +8,7 @@
     "start": "cross-env NODE_ENV=production node src/index.js",
     "test": "cross-env NODE_ENV=test jest --verbose",
     "test:syntax": "npm test -- --testPathPattern syntaxCheck",
-    "test:user": "npm test -- --testPathPattern UserService", 
+    "test:user": "npm test -- --testPathPattern UserService",
     "test:room": "npm test -- --testPathPattern RoomService",
     "test:report": "npm test -- --testPathPattern ReportChatService"
   },
@@ -16,9 +16,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.27.2",
     "bcrypt": "^5.0.1",
     "dotenv": "^16.0.1",
     "express": "4.18.1",
+    "moment": "^2.29.4",
     "mongodb": "^4.8.0",
     "mongoose": "^6.3.5",
     "socket.io": "4.5.1"

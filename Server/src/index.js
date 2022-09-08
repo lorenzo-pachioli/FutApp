@@ -5,9 +5,11 @@ const app = express();
 const http = require('http');
 const cors = require("cors");
 const { Server } = require('socket.io');
-const { api } = require('./api/index');
-const { toEvent } = require('./api/helper/SocketUtils');
-app.use(express.json());
+const { chat } = require('./chat/index');
+const  leagueRoutes  = require('./leagueStandings/routes/LeagueRoutes');
+const { toEvent } = require('./chat/helper/SocketUtils');
+require('./chat/service/MatchesService');
+app.set(express.json());
 app.use(cors());
 
 const server = http.createServer(app);
@@ -18,10 +20,11 @@ const io = new Server(server, {
     }
 });
 
-io.on("connect", (socket) => {
-    api(io, socket);
-});
+// API-FootBall routes
+app.use('', leagueRoutes)
 
+//Web socket chat
+chat(io);
 
 process.on('unhandledRejection', (err) => {
     console.log('Unhandled Rejection at:', err);

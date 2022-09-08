@@ -3,10 +3,11 @@ import { AppContext } from '../../Context/AppContext';
 import Chat from '../../Components/SubMain/Chat/Chat';
 import UserList from '../../Components/SubMain/UsersList/UserList';
 import './SubMain.css';
+import { Navigate } from 'react-router-dom';
 
 export default function SubMain({socket}){
 
-    const { setRoom, setChats } = useContext(AppContext);
+    const { user, setRoom, setChats } = useContext(AppContext);
 
     useEffect(() => {
         const newMessage = ()=>{
@@ -22,7 +23,8 @@ export default function SubMain({socket}){
      
     return(
         <div className='sub-main'>
-            <div className='sub-main-container'>
+            <div className='sub-main-container' style={{display:user ? ('flex'):('none')}}>
+                {user._id ? (''):(<Navigate to='/' replace={true} />)}
                 <UserList socket={socket} />
                 <Chat socket={socket}/>
             </div>

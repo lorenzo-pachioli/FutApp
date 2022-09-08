@@ -4,7 +4,7 @@ import userPhoto from '../../assets/user.png';
 import bell from '../../assets/bell.svg';
 import searchIcon from '../../assets/search-icon.svg';
 import Message from '../SubMain/Chat/Message/Message';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import './TopBar.css';
 
 export default function TopBar({ socket }) {
@@ -42,18 +42,14 @@ export default function TopBar({ socket }) {
                     <input type='text' placeholder='User search' />
                 </div>
             </div>
+            {user._id ? (
             <div className='user'>
                 <div>
-                    {user ? (
-                        user.img ? (
+                        {user.img ? (
                             <img src={user.img} className='img' alt='' />
                         ) : (
                             <img src={userPhoto} className='img' alt='' />
-                        )
-                    ) : (
-                        <img src={userPhoto} className='img' alt='' />
-                    )
-                    }
+                        )}
                     <p>{user ? (`${user.firstName + ' ' + user.lastName}`) : ('no user')}</p>
                 </div>
                 <button onClick={() => setShowList(unReadNum.length > 0 ? !showList : showList)}>
@@ -75,6 +71,13 @@ export default function TopBar({ socket }) {
                     ) : ('')}
                 </button>
             </div>
+            ) : (
+                <div className='no-user'>
+                    <Link className='to-login' to='/login'  style={{borderRight: '2px solid #F0F0F0'}}>Log in</Link>
+                    <Link className='to-login' to='/login/signin' >Sign in</Link>
+                </div>
+            )
+            }
         </div>
     )
 }

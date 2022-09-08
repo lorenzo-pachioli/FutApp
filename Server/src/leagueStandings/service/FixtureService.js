@@ -22,12 +22,16 @@ exports.FixtureService = async (league, res) => {
         .then(([seasonFixtureRes, currentRoundRes]) => {
             const currentRoundData = responseHandler(currentRoundRes, league, 'fixture');
             const seasonFixtureData = responseHandler(seasonFixtureRes, league, 'fixture');
-
+           
             if (seasonFixtureData.success) {
+                
                 seasonFixtureData.content = responseMapper(seasonFixtureData.content);
                 if (currentRoundData.success) {
                     const round = faseAndRound(currentRoundData.content[0]);
                     seasonFixtureData.content = seasonFixtureData.content.map(fase => fase.fase === round.faseNum ? ({ ...fase, current: round }) : (fase))
+                    
+                    res.json(seasonFixtureData);
+                }else {
                     res.json(seasonFixtureData);
                 };
 

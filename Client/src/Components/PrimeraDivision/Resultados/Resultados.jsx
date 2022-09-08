@@ -13,15 +13,31 @@ export default function Resultados() {
 
         if (resultsPD.length > 0) {
             const fase = resultsPD.find(fas => fas.current !== false)
-            setSelector(selec => {
-                if (!selec.faseNum) {
-                    return {
-                        faseNum: fase.current.faseNum - 1,
-                        roundNum: fase.current.roundNum - 1
+            if (fase) {
+                const round = fase.matches.find(rd => {
+                    let indice = rd[0].league.round.indexOf("-");
+                    // eslint-disable-next-line eqeqeq
+                    return rd[0].league.round.slice(indice + 2) == fase.current.roundNum
+                })
+
+                setSelector(selec => {
+                    if (!selec.faseNum) {
+                        return {
+                            faseNum: resultsPD.indexOf(fase),
+                            roundNum: fase.matches.indexOf(round)
+                        }
                     }
-                }
-                return selec;
-            });
+                    return selec;
+                });
+            } else {
+                console.log('no current');
+                setSelector({
+                    faseNum: resultsPD.length - 1,
+                    roundNum: 0
+                })
+            }
+
+
         }
     }, [resultsPD]);
 
@@ -33,7 +49,6 @@ export default function Resultados() {
                 setResults(resultsPD[selector.faseNum].matches[selector.roundNum])
             }
         }
-
     }, [resultsPD, selector]);
 
     const handleChangeRoundDown = () => {

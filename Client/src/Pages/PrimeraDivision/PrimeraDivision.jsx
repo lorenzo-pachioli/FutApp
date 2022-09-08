@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useRef } from 'react';
 import { AppContext } from '../../Context/AppContext';
 import { Link, Outlet, useLocation } from "react-router-dom";
 import axios from 'axios';
@@ -10,19 +10,19 @@ export default function PrimeraDivision({ socket }) {
 
     const { setprimeraDivision, setResultsPD } = useContext(AppContext);
     const history = useLocation();
+    const fetchmade = useRef(false);
 
     useEffect(() => {
         function getData() {
-
             const LPA = ['128', '2022'];
-            console.log('1');
             const endPoint1 = 'http://localhost:3001'
-
+            console.log('1');
             const fect1 = axios.get(endPoint1 + `/standings?league=${LPA[0]}`)
             const fect2 = axios.get(endPoint1 + `/fixtures?league=${LPA[0]}`)
 
             Promise.all([fect1, fect2])
                 .then(([fect1, fect2]) => {
+                    console.log(fect2);
                     if (fect1.status === 200) {
                         if (fect1.data.success) {
                             setprimeraDivision(fect1.data.content[0].league);
@@ -33,13 +33,17 @@ export default function PrimeraDivision({ socket }) {
                     if (fect2.status === 200) {
                         if (fect2.data.success) {
                             setResultsPD(fect2.data.content);
-                            console.log('3');
                         }
                     }
                 })
                 .catch(err => console.log('error:', err));
         }
-        getData()
+
+        if (!fetchmade.current) {
+            fetchmade.current = true;
+            getData()
+        };
+        
     }, [setResultsPD, setprimeraDivision]);
 
     return (

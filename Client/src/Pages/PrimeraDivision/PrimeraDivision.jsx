@@ -16,23 +16,24 @@ export default function PrimeraDivision({ socket }) {
         function getData() {
             const LPA = ['128', '2022'];
             const endPoint1 = 'http://localhost:3001'
-            console.log('1');
+            console.time('time 1');
             const fect1 = axios.get(endPoint1 + `/standings?league=${LPA[0]}`)
             const fect2 = axios.get(endPoint1 + `/fixtures?league=${LPA[0]}`)
 
             Promise.all([fect1, fect2])
                 .then(([fect1, fect2]) => {
-                    console.log(fect2);
+                    /* console.log(fect2); */
                     if (fect1.status === 200) {
                         if (fect1.data.success) {
-                            setprimeraDivision(fect1.data.content[0].league);
-                            console.log('2');
+                            setprimeraDivision(fect1.data.content.league);
                         }
                     }
 
                     if (fect2.status === 200) {
                         if (fect2.data.success) {
+                            console.timeEnd('time 1');
                             setResultsPD(fect2.data.content);
+                            
                         }
                     }
                 })

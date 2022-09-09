@@ -7,6 +7,7 @@ const cors = require("cors");
 const { Server } = require('socket.io');
 const { chat } = require('./chat/index');
 const  leagueRoutes  = require('./leagueStandings/routes/LeagueRoutes');
+const {FixtureCrone} = require('./leagueStandings/service/CroneService');
 const { toEvent } = require('./chat/helper/SocketUtils');
 require('./chat/service/MatchesService');
 app.set(express.json());
@@ -20,6 +21,9 @@ const io = new Server(server, {
     }
 });
 
+// Fixture updater every day at 04:00:00 am
+FixtureCrone.start();
+
 // API-FootBall routes
 app.use('', leagueRoutes)
 
@@ -28,12 +32,12 @@ chat(io);
 
 process.on('unhandledRejection', (err) => {
     console.log('Unhandled Rejection at:', err);
-    toEvent('', { msg: `Unhandled Rejection: ${err}`, status: false });
+    /* toEvent('', { msg: `Unhandled Rejection: ${err}`, status: false }); */
 });
 
 process.on('uncaughtException', (err, origin) => {
     console.log(`Caught exception: ${err}`, ` origin: ${origin}`);
-    toEvent('', { msg: `Caught exception: ${err}`, at: origin, status: false });
+    /* toEvent('', { msg: `Caught exception: ${err}`, at: origin, status: false }); */
 });
 
 const port = process.env.PORT || 3001;

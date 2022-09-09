@@ -15,8 +15,6 @@ exports.FixtureCrone = new CronJob(
         FixtureUpdater();
         StandingsService();
     },
-    null,
-    true,
     'America/Argentina/Buenos_Aires'
 );
 

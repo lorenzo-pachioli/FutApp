@@ -1,6 +1,7 @@
-const { FixtureService } = require('../service/FixtureService');
 
-exports.FixtureControler = (league, res) => {
+exports.FixtureControler = (req, res, next) => {
+    const league = req.query.league;
+
     if (league.length < 3 ||
         league.length > 4
     ) return res.json({
@@ -9,5 +10,5 @@ exports.FixtureControler = (league, res) => {
         msj: 'Incorrect league number'
     });
 
-    FixtureService(league, res);
+    next();
 }

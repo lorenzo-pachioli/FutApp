@@ -1,6 +1,7 @@
-const { StandingsService } = require('../service/StandingsService');
 
-exports.StandingsControler = (league, res) => {
+exports.StandingsControler = (req, res, next) => {
+    const league = req.query.league;
+
     if (league.length < 3 ||
         league.length > 4
     ) return res.json({
@@ -9,5 +10,5 @@ exports.StandingsControler = (league, res) => {
         msj: 'Incorrect league number'
     });
 
-    StandingsService(league, res);
+    next();
 }

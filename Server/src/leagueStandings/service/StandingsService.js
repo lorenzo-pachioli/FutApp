@@ -1,25 +1,14 @@
 const Standings = require('../models/StandingsModel');
 
-exports.StandingsService = async (league, res) => {
-    try {
-        Standings.findOne({ _id: league }, {}, (err, standings) => {
-            if (err) return res.json({
-                success: false,
-                msj: `Error: ${err}`,
-                content: []
-            });
+exports.StandingsService = (league, res, next) => {
 
-            res.json({
-                success: true,
-                msj: `League ${league} standings in 2022`,
-                content: standings.standings
-            });
-        })
-    } catch (err) {
-        return res.json({
-            success: false,
-            msj: `Error: ${err}`,
-            content: []
+    Standings.findOne({ _id: league }, {}, (err, standings) => {
+        if (err) return next(err);
+
+        res.json({
+            success: true,
+            msj: `League ${league} standings in 2022`,
+            content: standings.standings
         });
-    }
+    });
 }

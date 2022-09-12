@@ -27,7 +27,11 @@ router.use((err, req, res, next) => {
 
 router.use((req, res) => {
     const path = req.originalUrl;
-    res.status(404).send(`Sorry can't find: ${path}`);
+    res.status(404).json({
+        success: false,
+        content: [],
+        msj: `Sorry can't find: '${path}'.`
+    });
 });
 
 module.exports = router;

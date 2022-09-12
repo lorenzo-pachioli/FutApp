@@ -25,7 +25,7 @@ const io = new Server(server, {
 FixtureCrone.start();
 
 // API-FootBall routes
-app.use('', leagueRoutes)
+app.use(leagueRoutes)
 
 //Web socket chat
 chat(io);
